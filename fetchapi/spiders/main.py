@@ -2,7 +2,7 @@ from ast import Store
 from time import strftime
 import scrapy
 import json
-from datetime import datetime
+
 
 class MainSpider(scrapy.Spider):
     name = "main"
