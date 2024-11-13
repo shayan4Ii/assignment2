@@ -1,5 +1,3 @@
-from ast import Store
-from time import strftime
 import scrapy
 import json
 
