@@ -1,6 +1,8 @@
 from ast import Store
+from time import strftime
 import scrapy
 import json
+from datetime import datetime
 
 class MainSpider(scrapy.Spider):
     name = "main"
@@ -10,6 +12,7 @@ class MainSpider(scrapy.Spider):
         'FEED_EXPORT_IDENT': 4
 
     }
+    
     def parse(self, response):
         examples = json.loads(response.body)
         for store in examples['data']['stores']:
@@ -17,24 +20,24 @@ class MainSpider(scrapy.Spider):
             hours = store['hours']
             for hour in hours:
                 hour_s[hour['weekDay']] = {
-                    'openTime' : hour['openTime'],
-                    'closeTime' : hour['closeTime']
+                    'open' : f"{hour['openTime']} am",
+                    'close' : f"{hour['closeTime']} pm",
                 }
-            hour_s['Monday'] = hour_s['MON']
+
+            hour_s['monday'] = hour_s['MON']
             del hour_s['MON']
-            hour_s['Tuesday'] = hour_s['TUE']
+            hour_s['tuesday'] = hour_s['TUE']
             del hour_s['TUE']
-            hour_s['Wednesday'] = hour_s['WED']
+            hour_s['wednesday'] = hour_s['WED']
             del hour_s['WED']
-            hour_s['Thursday'] = hour_s['THU']
+            hour_s['thursday'] = hour_s['THU']
             del hour_s['THU']
-            hour_s['Friday'] = hour_s['FRI']
+            hour_s['friday'] = hour_s['FRI']
             del hour_s['FRI']
-            hour_s['Saturday'] = hour_s['SAT']
+            hour_s['saturday'] = hour_s['SAT']
             del hour_s['SAT']
-            hour_s['Sunday'] = hour_s['SUN']
-            del hour_s['SUN']
-#            hour_s.update({'MON':'MONDAY'})
+            hour_s['sunday'] = hour_s['SUN']
+            del hour_s['SUN'] 
 
             yield{
             'hours' : hour_s
