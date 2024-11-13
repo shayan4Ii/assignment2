@@ -20,9 +20,25 @@ class MainSpider(scrapy.Spider):
                     'openTime' : hour['openTime'],
                     'closeTime' : hour['closeTime']
                 }
+            hour_s['Monday'] = hour_s['MON']
+            del hour_s['MON']
+            hour_s['Tuesday'] = hour_s['TUE']
+            del hour_s['TUE']
+            hour_s['Wednesday'] = hour_s['WED']
+            del hour_s['WED']
+            hour_s['Thursday'] = hour_s['THU']
+            del hour_s['THU']
+            hour_s['Friday'] = hour_s['FRI']
+            del hour_s['FRI']
+            hour_s['Saturday'] = hour_s['SAT']
+            del hour_s['SAT']
+            hour_s['Sunday'] = hour_s['SUN']
+            del hour_s['SUN']
+#            hour_s.update({'MON':'MONDAY'})
 
             yield{
             'hours' : hour_s
+
             }
         
         
